@@ -1,12 +1,14 @@
-module github.com/nexient-llc/tf-azurerm-module_primitive-key_vault
+module github.com/launchbynttdata/tf-azurerm-module_primitive-key_vault
 
 go 1.21
 
 require (
 	github.com/gruntwork-io/terratest v0.46.11
-	github.com/nexient-llc/lcaf-component-terratest-common v1.0.1
+	github.com/launchbynttdata/lcaf-component-terratest v1.0.3
 	github.com/stretchr/testify v1.8.4
 )
+
+replace github.com/Azure/azure-sdk-for-go v68.0.0+incompatible => github.com/Azure/azure-sdk-for-go v51.0.0+incompatible
 
 require (
 	cloud.google.com/go v0.110.0 // indirect
@@ -14,7 +16,7 @@ require (
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cloud.google.com/go/iam v0.13.0 // indirect
 	cloud.google.com/go/storage v1.28.1 // indirect
-	github.com/Azure/azure-sdk-for-go v51.0.0+incompatible // indirect
+	github.com/Azure/azure-sdk-for-go v68.0.0+incompatible // indirect
 	github.com/Azure/go-autorest v14.2.0+incompatible // indirect
 	github.com/Azure/go-autorest/autorest v0.11.20 // indirect
 	github.com/Azure/go-autorest/autorest/adal v0.9.13 // indirect

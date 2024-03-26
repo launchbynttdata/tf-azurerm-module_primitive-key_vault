@@ -15,7 +15,7 @@ data "azurerm_client_config" "current" {
 }
 
 module "resource_names" {
-  source = "git::https://github.com/nexient-llc/tf-module-resource_name.git?ref=1.1.0"
+  source = "git::https://github.com/launchbynttdata/tf-launch-module_library-resource_name.git?ref=1.0.0"
 
   for_each = var.resource_names_map
 
@@ -29,7 +29,7 @@ module "resource_names" {
 }
 
 module "resource_group" {
-  source = "git::https://github.com/nexient-llc/tf-azurerm-module_primitive-resource_group.git?ref=0.2.0"
+  source = "git::https://github.com/launchbynttdata/tf-azurerm-module_primitive-resource_group.git?ref=1.0.0"
 
   name     = module.resource_names["rg"].minimal_random_suffix
   location = var.region
@@ -60,7 +60,7 @@ module "key_vault" {
 }
 
 module "key_vault_role_assignment" {
-  source = "git::https://github.com/nexient-llc/tf-azurerm-module_primitive-role_assignment.git?ref=0.1.0"
+  source = "git::https://github.com/launchbynttdata/tf-azurerm-module_primitive-role_assignment.git?ref=1.0.0"
 
   principal_id         = data.azurerm_client_config.current.object_id
   role_definition_name = "Key Vault Administrator"
