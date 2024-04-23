@@ -94,16 +94,16 @@ variable "enable_rbac_authorization" {
 variable "network_acls" {
   description = "Network ACLs for the key vault"
   type = object({
-    bypass         = string
-    default_action = string
-    ip_rules       = optional(list(string))
+    bypass                     = string
+    default_action             = string
+    ip_rules                   = optional(list(string))
     virtual_network_subnet_ids = optional(list(string))
   })
 
   default = {
-    bypass         = ["AzureServices"]
-    default_action = "Allow"
-    ip_rules       = []
+    bypass                     = "AzureServices"
+    default_action             = "Allow"
+    ip_rules                   = []
     virtual_network_subnet_ids = []
   }
 }
