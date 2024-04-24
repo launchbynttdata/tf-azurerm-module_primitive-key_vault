@@ -91,12 +91,35 @@ variable "enable_rbac_authorization" {
   default     = false
 }
 
-# Variables to import pre existing certificates to the key vault
+variable "network_acls" {
+  description = "Network ACLs for the key vault"
+  type = object({
+    bypass                     = string
+    default_action             = string
+    ip_rules                   = optional(list(string))
+    virtual_network_subnet_ids = optional(list(string))
+  })
+
+  default = {
+    bypass                     = "AzureServices"
+    default_action             = "Allow"
+    ip_rules                   = []
+    virtual_network_subnet_ids = []
+  }
+}
+
+variable "public_network_access_enabled" {
+  description = " (Optional) Whether public network access is allowed for this Key Vault. Defaults to true."
+  type        = bool
+  default     = true
+}
+
 variable "certificates" {
-  description = "List of certificates to be imported. The pfx files should be present in the root of the module (path.root) and its name denoted as certificate_name"
+  description = "List of certificates to be imported. If `filepath` is specified then the pfx files should be present in the root of the module (path.root). If `content` is specified then the content of the certificate should be provided in base 64 encoded format. Only one of them should be provided."
   type = map(object({
-    certificate_name = string
-    password         = string
+    contents = optional(string)
+    filepath = optional(string)
+    password = string
   }))
 
   default = {}

@@ -115,7 +115,7 @@ If `make check` target is successful, developer is good to commit the code to pr
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.67.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.100.0 |
 
 ## Modules
 
@@ -145,7 +145,9 @@ No modules.
 | <a name="input_custom_tags"></a> [custom\_tags](#input\_custom\_tags) | Custom tags for the Key vault | `map(string)` | `{}` | no |
 | <a name="input_access_policies"></a> [access\_policies](#input\_access\_policies) | Additional Access policies for the vault except the current user which are added by default | <pre>map(object({<br>    object_id               = string<br>    tenant_id               = string<br>    key_permissions         = list(string)<br>    certificate_permissions = list(string)<br>    secret_permissions      = list(string)<br>    storage_permissions     = list(string)<br>  }))</pre> | `{}` | no |
 | <a name="input_enable_rbac_authorization"></a> [enable\_rbac\_authorization](#input\_enable\_rbac\_authorization) | Enable RBAC authorization for the key vault | `bool` | `false` | no |
-| <a name="input_certificates"></a> [certificates](#input\_certificates) | List of certificates to be imported. The pfx files should be present in the root of the module (path.root) and its name denoted as certificate\_name | <pre>map(object({<br>    certificate_name = string<br>    password         = string<br>  }))</pre> | `{}` | no |
+| <a name="input_network_acls"></a> [network\_acls](#input\_network\_acls) | Network ACLs for the key vault | <pre>object({<br>    bypass                     = string<br>    default_action             = string<br>    ip_rules                   = optional(list(string))<br>    virtual_network_subnet_ids = optional(list(string))<br>  })</pre> | <pre>{<br>  "bypass": "AzureServices",<br>  "default_action": "Allow",<br>  "ip_rules": [],<br>  "virtual_network_subnet_ids": []<br>}</pre> | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | (Optional) Whether public network access is allowed for this Key Vault. Defaults to true. | `bool` | `true` | no |
+| <a name="input_certificates"></a> [certificates](#input\_certificates) | List of certificates to be imported. If `filepath` is specified then the pfx files should be present in the root of the module (path.root). If `content` is specified then the content of the certificate should be provided in base 64 encoded format. Only one of them should be provided. | <pre>map(object({<br>    contents = optional(string)<br>    filepath = optional(string)<br>    password = string<br>  }))</pre> | `{}` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | List of secrets (name and value) | `map(string)` | `{}` | no |
 | <a name="input_keys"></a> [keys](#input\_keys) | List of keys to be created in key vault. Name of the key is the key of the map | <pre>map(object({<br>    key_type = string<br>    key_size = number<br>    key_opts = list(string)<br>  }))</pre> | `{}` | no |
 

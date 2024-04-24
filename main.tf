@@ -11,7 +11,6 @@
 // limitations under the License.
 
 data "azurerm_client_config" "current" {
-
 }
 
 resource "azurerm_key_vault" "key_vault" {
@@ -25,6 +24,20 @@ resource "azurerm_key_vault" "key_vault" {
   purge_protection_enabled        = var.purge_protection_enabled
   sku_name                        = var.sku_name
   enable_rbac_authorization       = var.enable_rbac_authorization
+
+  dynamic "network_acls" {
+    for_each = var.network_acls != null ? [var.network_acls] : []
+
+    content {
+      bypass         = network_acls.value.bypass
+      default_action = network_acls.value.default_action
+
+      ip_rules                   = network_acls.value.ip_rules
+      virtual_network_subnet_ids = network_acls.value.virtual_network_subnet_ids
+    }
+  }
+  public_network_access_enabled = var.public_network_access_enabled
+
   # Required by terraform
   dynamic "access_policy" {
     for_each = local.access_policies
@@ -49,7 +62,7 @@ resource "azurerm_key_vault_certificate" "certs" {
   key_vault_id = azurerm_key_vault.key_vault.id
 
   certificate {
-    contents = filebase64("${path.root}/${each.value.certificate_name}")
+    contents = each.value.filepath != null ? filebase64("${path.root}/${each.value.filepath}") : each.value.contents
     password = each.value.password
   }
 

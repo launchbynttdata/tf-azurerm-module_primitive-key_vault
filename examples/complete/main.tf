@@ -37,6 +37,7 @@ module "resource_group" {
   tags = merge(var.tags, { resource_name = module.resource_names["rg"].standard })
 
 }
+
 module "key_vault" {
 
   source = "../.."
