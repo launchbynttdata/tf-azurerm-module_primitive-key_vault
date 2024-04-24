@@ -103,11 +103,22 @@ variable "enable_rbac_authorization" {
 }
 
 # Variables to import pre existing certificates to the key vault
+# variable "certificates" {
+#   description = "List of certificates to be imported. The pfx files should be present in the root of the module (path.root) and its name denoted as certificate_name"
+#   type = map(object({
+#     certificate_name = string
+#     password         = string
+#   }))
+
+#   default = {}
+# }
+
 variable "certificates" {
-  description = "List of certificates to be imported. The pfx files should be present in the root of the module (path.root) and its name denoted as certificate_name"
+  description = "List of certificates to be imported. If `filepath` is specified then the pfx files should be present in the root of the module (path.root). If `content` is specified then the content of the certificate should be provided in base 64 encoded format. Only one of them should be provided."
   type = map(object({
-    certificate_name = string
-    password         = string
+    contents = optional(string)
+    filepath = optional(string)
+    password = string
   }))
 
   default = {}

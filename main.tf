@@ -33,12 +33,12 @@ resource "azurerm_key_vault" "key_vault" {
       bypass         = network_acls.value.bypass
       default_action = network_acls.value.default_action
 
-      ip_rules      = network_acls.value.ip_rules
+      ip_rules                   = network_acls.value.ip_rules
       virtual_network_subnet_ids = network_acls.value.virtual_network_subnet_ids
     }
   }
   public_network_access_enabled = var.public_network_access_enabled
-  
+
   # Required by terraform
   dynamic "access_policy" {
     for_each = local.access_policies
@@ -63,7 +63,7 @@ resource "azurerm_key_vault_certificate" "certs" {
   key_vault_id = azurerm_key_vault.key_vault.id
 
   certificate {
-    contents = filebase64("${path.root}/${each.value.certificate_name}")
+    contents = each.value.filepath != null ? filebase64("${path.root}/${each.value.filepath}") : each.value.contents
     password = each.value.password
   }
 
