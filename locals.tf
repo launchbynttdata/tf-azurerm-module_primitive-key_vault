@@ -12,7 +12,8 @@
 
 locals {
   default_tags = {
-    "provisioner" : "Terraform"
+    "provisioner" = "Terraform"
+    resource_name = var.key_vault_name 
   }
 
   tags = merge(local.default_tags, var.custom_tags)
