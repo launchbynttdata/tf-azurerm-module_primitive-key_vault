@@ -6,4 +6,4 @@ tags = {
 }
 
 enable_rbac_authorization = true
-principal_type            = "User"
+principal_type            = "ServiceAccount"
