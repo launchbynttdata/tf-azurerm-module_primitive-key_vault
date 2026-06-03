@@ -67,6 +67,7 @@ module "key_vault_role_assignment" {
   version = "~> 1.0"
 
   principal_id         = data.azurerm_client_config.current.object_id
+  principal_type       = var.principal_type
   role_definition_name = "Key Vault Administrator"
   scope                = module.key_vault.key_vault_id
 
