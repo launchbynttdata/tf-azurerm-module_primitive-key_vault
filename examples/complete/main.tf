@@ -31,7 +31,7 @@ module "resource_names" {
 
 module "resource_group" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm"
-  version = "~> 1.0"
+  version = "~> 2.4"
 
   name     = module.resource_names["rg"].minimal_random_suffix
   location = var.region
@@ -64,7 +64,7 @@ module "key_vault" {
 
 module "key_vault_role_assignment" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/role_assignment/azurerm"
-  version = "~> 1.0"
+  version = "~> 2.4"
 
   principal_id         = data.azurerm_client_config.current.object_id
   principal_type       = var.principal_type
