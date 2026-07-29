@@ -6,4 +6,6 @@ tags = {
 }
 
 enable_rbac_authorization = true
-principal_type            = "ServiceAccount"
+
+# Must be set to 'User' when running locally
+principal_type = "ServicePrincipal"
