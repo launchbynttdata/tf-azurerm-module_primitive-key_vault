@@ -64,9 +64,10 @@ module "key_vault" {
 
 module "key_vault_role_assignment" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/role_assignment/azurerm"
-  version = "~> 1.0"
+  version = "~> 1.3"
 
   principal_id         = data.azurerm_client_config.current.object_id
+  principal_type       = var.principal_type
   role_definition_name = "Key Vault Administrator"
   scope                = module.key_vault.key_vault_id
 

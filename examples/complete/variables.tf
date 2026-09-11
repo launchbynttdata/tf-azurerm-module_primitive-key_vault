@@ -141,3 +141,10 @@ variable "keys" {
   }))
   default = {}
 }
+
+
+variable "principal_type" {
+  description = "The type of principal for the role assignment."
+  type        = string
+  default     = "User"
+}
