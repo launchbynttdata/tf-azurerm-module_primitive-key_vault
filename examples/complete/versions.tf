@@ -15,8 +15,9 @@ terraform {
 
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~>3.67"
+      source = "hashicorp/azurerm"
+      # role_assignment sets principal_type, which azurerm only accepts from 3.87.
+      version = ">= 3.87, < 5.0"
     }
   }
 }
